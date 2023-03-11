@@ -142,17 +142,26 @@ export default class Main extends Component {
     })
   }
 
-  handleEducation(e) {
-    this.setState({
-      personalInfo: {
-        firstName: this.state.personalInfo.firstName,
-        lastName: e.target.value,
-        title: this.state.personalInfo.lastName,
-        description: this.state.personalInfo.description,
-        mobile: this.state.personalInfo.mobile,
-        address: this.state.personalInfo.address,
-        email: this.state.personalInfo.email,
+  handleEducation(e, educationId) {
+    const newEducations = []
+    this.state.educations.forEach(education => {
+      if (education.id !== educationId) {
+        newEducations.push(education)
+      } else {
+        let newInfo = {}
+        for (let key in education) {
+          if (e.target.getAttribute("name") !== key) {
+            newInfo[key] = education[key]
+          } else {
+            newInfo[key] = e.target.value
+          }
+        }
+        newEducations.push(newInfo)
       }
+      this.setState({
+        educations: newEducations
+      })
+
     })
   }
 
@@ -162,10 +171,10 @@ export default class Main extends Component {
         <CVFORM 
           handlePersonalInfo={this.handlePersonalInfo}
           handleWorkInfo={this.handleWorkInfo}
+          handleEducation={this.handleEducation}
           personalInfo={this.state.personalInfo}
           workExperiences={this.state.workExperiences}
           educations={this.state.educations}
-          pers={this.handlePersonalChange}
         />
         <CVPREVIEW 
           personalInfo={this.state.personalInfo}
