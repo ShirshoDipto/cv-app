@@ -16,6 +16,8 @@
 
 .cv-form-container {
   flex: 1;
+  max-height: calc(100vh - 160px);
+  overflow: scroll;
 }
 
 .other-info-container {

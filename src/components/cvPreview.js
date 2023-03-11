@@ -11,7 +11,8 @@ export default class CVPREVIEW extends Component {
     return (
       <div className="cv-preview-container">
         <div className="personalinfo-container">
-          <h1 className="cv-name">{personalInfo.name}</h1>
+          <h1 className="cv-name">{personalInfo.firstName} {personalInfo.lastName}</h1>
+          <h3 className="cv-title">{personalInfo.title}</h3>
           <div className="contact-info">
             <div className="address">{personalInfo.address}</div>
             <div className="phone">{personalInfo.mobile}</div>
@@ -46,8 +47,6 @@ export default class CVPREVIEW extends Component {
                 return (
                   <div key={elem.id} className="education">
                     <div className="input-vals">
-                      <i className="fa-solid fa-pencil"></i>
-                      <i className="fa-solid fa-trash-can"></i>
                       <div className="input-title">{elem.institution}, {elem.location}</div>
                       <div className="input-duration">{elem.degree} | {elem.from}-{elem.to}</div>
                     </div>

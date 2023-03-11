@@ -10,12 +10,43 @@ export default class Main extends Component {
 
     this.state = {
       personalInfo: {
-        name: "Md Shirsho Dipto Haque",
+        firstName: "Md Shirsho",
+        lastName: "Dipto Haque",
         title: "Junior Software Developer",
         description: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Minima tempora sequi architecto quidem quos consequatur exercitationem hic cumque nisi odit dicta nam soluta eligendi ad sit adipisci rerum, ratione possimus.",
         mobile: "+88017xxxxxxxx",
         address: "Kushtia, Bangladesh",
         email: "someeamil@gmail.com"
+      },
+
+      personalTemp: {
+        firstName: "Md Shirsho",
+        lastName: "Dipto Haque",
+        title: "Junior Software Developer",
+        description: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Minima tempora sequi architecto quidem quos consequatur exercitationem hic cumque nisi odit dicta nam soluta eligendi ad sit adipisci rerum, ratione possimus.",
+        mobile: "+88017xxxxxxxx",
+        address: "Kushtia, Bangladesh",
+        email: "someeamil@gmail.com"
+      },
+
+      workExperience: {
+        id: uuidv4(),
+        position: "",
+        company: "",
+        location: "",
+        description: "",
+        from: "",
+        to: ""
+      },
+
+      education: {
+        id: uuidv4(),
+        institution: "",
+        location: "",
+        degree: "",
+        subject: "",
+        from: "",
+        to: ""
       },
 
       workExperiences: [
@@ -69,51 +100,77 @@ export default class Main extends Component {
         }
       ]
     }
-
-    this.handlePersonalChange = this.handlePersonalChange.bind(this)
-    this.handleWorkChange = this.handleWorkChange.bind(this)
-    this.handleEducationChange = this.handleEducationChange.bind(this)
+    this.handlePersonalInfo = this.handlePersonalInfo.bind(this) 
+    this.handleWorkInfo = this.handleWorkInfo.bind(this)
+    this.handleEducation = this.handleEducation.bind(this)
   }
 
-  handlePersonalChange(e) {
-    e.preventDefault()
-    const formData = new FormData(e.target)
-    const formJson = Object.fromEntries(formData.entries())
-    this.setState({
-      personalInfo: {
-        name: formJson.firstName + " " + formJson.lastName,
-        title: formJson.personTitle,
-        description: formJson.personDescription,
-        mobile: formJson.personMobile,
-        address: formJson.personAddress,
-        email: formJson.personEmail
+  handlePersonalInfo(e) {
+    let newPersonalInfo = {}
+    for (let key in this.state.personalInfo) {
+      if (e.target.getAttribute("name") !== key) {
+        newPersonalInfo[key] = this.state.personalInfo[key]
+      } else {
+        newPersonalInfo[key] = e.target.value
       }
+    }
+    this.setState({
+      personalInfo: newPersonalInfo
     })
   }
 
-  handleEducationChange(e) {
-    e.preventDefault()
-    console.log("it is working. education. ")
+  handleWorkInfo(e, workId) {
+    const newWorkExperiences = []
+    this.state.workExperiences.forEach(experience => {
+      if (experience.id !== workId) {
+        newWorkExperiences.push(experience)
+      } else {
+        let newInfo = {}
+        for (let key in experience) {
+          if (e.target.getAttribute("name") !== key) {
+            newInfo[key] = experience[key]
+          } else {
+            newInfo[key] = e.target.value
+          }
+        }
+        newWorkExperiences.push(newInfo)
+      }
+      this.setState({
+        workExperiences: newWorkExperiences
+      })
+
+    })
   }
 
-  handleWorkChange(e) {
-    e.preventDefault()
-    console.log("it is working. work. ")
+  handleEducation(e) {
+    this.setState({
+      personalInfo: {
+        firstName: this.state.personalInfo.firstName,
+        lastName: e.target.value,
+        title: this.state.personalInfo.lastName,
+        description: this.state.personalInfo.description,
+        mobile: this.state.personalInfo.mobile,
+        address: this.state.personalInfo.address,
+        email: this.state.personalInfo.email,
+      }
+    })
   }
 
   render() {
     return (
       <div className="main-container">
         <CVFORM 
+          handlePersonalInfo={this.handlePersonalInfo}
+          handleWorkInfo={this.handleWorkInfo}
+          personalInfo={this.state.personalInfo}
+          workExperiences={this.state.workExperiences}
+          educations={this.state.educations}
           pers={this.handlePersonalChange}
-          work={this.handleEducationChange}
-          edu={this.handleEducationChange}
         />
         <CVPREVIEW 
           personalInfo={this.state.personalInfo}
           workExperiences={this.state.workExperiences}
           educations={this.state.educations}
-          state={this.state}
         />
       </div>
     )

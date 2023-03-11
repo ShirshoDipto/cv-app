@@ -7,81 +7,86 @@ export default class CVFORM extends Component {
   }
 
   render() {
-    const { pers, work, edu } = this.props
-    console.log(this.props)
+    const { handlePersonalInfo, handleWorkInfo, personalInfo, workExperiences, educations } = this.props
     return (
       <div className="cv-form-container">
-        <form className="personal-info-form" onSubmit={pers}>
+        <form className="personal-info-form">
           <div className="personal-info">
             <h2 className="info-title">Personal Information</h2>
             <div className="names">
               <div className="label-input-group first-name">
                 <label htmlFor="first-name">First Name:</label>
-                <input type="text" id="first-name" name="firstName"/>
+                <input type="text" id="first-name" name="firstName" value={personalInfo.firstName} onChange={handlePersonalInfo}/>
               </div>
               <div className="label-input-group last-name">
                 <label htmlFor="last-name">Last Name:</label>
-                <input type="text" id="last-name" name="lastName"/>
+                <input type="text" id="last-name" name="lastName" value={personalInfo.lastName} onChange={handlePersonalInfo}/>
               </div>
             </div>
             <div className="label-input-group">
               <label htmlFor="person-title">Title:</label>
-              <input type="text" id="person-title" name="personTitle"/>
+              <input type="text" id="person-title" name="title" value={personalInfo.title} onChange={handlePersonalInfo}/>
             </div>
             <div className="label-input-group">
               <label htmlFor="person-mobile">Mobile:</label>
-              <input type="text" id="person-mobile" name="personMobile"/>
+              <input type="text" id="person-mobile" name="mobile" value={personalInfo.mobile} onChange={handlePersonalInfo}/>
             </div>
             <div className="label-input-group">
               <label htmlFor="person-address">Address:</label>
-              <input type="text" id="person-address" name="personAddress"/>
+              <input type="text" id="person-address" name="address" value={personalInfo.address} onChange={handlePersonalInfo}/>
             </div>
             <div className="label-input-group">
               <label htmlFor="person-email">Email:</label>
-              <input type="text" id="person-email" name="personEmail"/>
+              <input type="text" id="person-email" name="email" value={personalInfo.email} onChange={handlePersonalInfo}/>
             </div>
             <div className="label-input-group">
               <label htmlFor="person-description">Tell us about yourself:</label>
-              <textarea type="text" id="person-description" name="personDescription" rows="5"></textarea>
+              <textarea type="text" id="person-description" name="description" rows="5" value={personalInfo.description} onChange={handlePersonalInfo}></textarea>
             </div>
             <button type="submit">Save</button>
           </div>
         </form>
-        <form className="work-experience-form" onSubmit={work}>
-          <div className="work-experiences">
-            <h2 className="info-title">Work Experience</h2>
-            <div className="work-experience">
-              <div className="label-input-group">
-                <label htmlFor="person-position">Position:</label>
-                <input type="text" id="person-position" name="personPosition"/>
-              </div>
-              <div className="label-input-group">
-                <label htmlFor="person-company">Company:</label>
-                <input type="text" id="person-company" name="personCompany"/>
-              </div>
-              <div className="label-input-group">
-                <label htmlFor="person-work-location">Location:</label>
-                <input type="text" id="person-work-location" name="personWorkLocation"/>
-              </div>
-              <div className="names">
-                <div className="label-input-group first-name">
-                  <label htmlFor="work-from">From:</label>
-                  <input type="text" id="work-from" name="workFrom"/>
+        <form className="work-experience-form">
+          {
+            workExperiences.map(experience => {
+              return (
+                <div key={experience.id} className="work-experiences">
+                  <h2 className="info-title">Work Experience</h2>
+                  <div className="work-experience">
+                    <div className="label-input-group">
+                      <label htmlFor="person-position">Position:</label>
+                      <input type="text" id="person-position" name="position" value={experience.position} onChange={(e) => handleWorkInfo(e, experience.id)}/>
+                    </div>
+                    <div className="label-input-group">
+                      <label htmlFor="person-company">Company:</label>
+                      <input type="text" id="person-company" name="company" value={experience.company} onChange={(e) => handleWorkInfo(e, experience.id)}/>
+                    </div>
+                    <div className="label-input-group">
+                      <label htmlFor="person-work-location">Location:</label>
+                      <input type="text" id="person-work-location" name="location" value={experience.location} onChange={(e) => handleWorkInfo(e, experience.id)}/>
+                    </div>
+                    <div className="names">
+                      <div className="label-input-group first-name">
+                        <label htmlFor="work-from">From:</label>
+                        <input type="text" id="work-from" name="from" value={experience.from} onChange={(e) => handleWorkInfo(e, experience.id)}/>
+                      </div>
+                      <div className="label-input-group last-name">
+                        <label htmlFor="work-to">To:</label>
+                        <input type="text" id="work-to" name="to" value={experience.to} onChange={(e) => handleWorkInfo(e, experience.id)}/>
+                      </div>
+                    </div>
+                    <div className="label-input-group">
+                      <label htmlFor="person-work-description">Description:</label>
+                      <textarea type="text" id="person-work-description" name="description" rows="5" value={experience.description} onChange={(e) => handleWorkInfo(e, experience.id)}></textarea>
+                    </div>
+                  </div>
+                  <button type="submit">Save</button>
                 </div>
-                <div className="label-input-group last-name">
-                  <label htmlFor="work-to">To:</label>
-                  <input type="text" id="work-to" name="workTo"/>
-                </div>
-              </div>
-              <div className="label-input-group">
-                <label htmlFor="person-work-description">Description:</label>
-                <textarea type="text" id="person-work-description" name="personWorkDescription" rows="5"></textarea>
-              </div>
-            </div>
-            <button type="submit">Save</button>
-          </div>
+              )
+            })
+          }
         </form>
-        <form className="education-form" onSubmit={edu}>
+        <form className="education-form">
           <div className="educations">
             <h2 className="info-title">Education</h2>
             <div className="education">
