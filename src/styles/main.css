@@ -1,22 +1,24 @@
 .main-container {
   flex: 1;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  gap: 20px;
 }
 
-.cv-preview-container {
+.cv-preview-container,
+.cv-form-container form {
   display: flex;
   flex-direction: column;
   gap: 20px;
   flex: 1;
+  border: thin solid grey;
+  padding: 10px;
 }
 
 .cv-form-container {
   flex: 1;
 }
-.other-info-container
-{
+
+.other-info-container {
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -48,4 +50,28 @@
 .title {
   border-bottom: thin solid grey;
   padding-bottom: 3px;
+}
+
+/* CV form styles */
+.label-input-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.names {
+  display: flex;
+  justify-content: space-between;
+  gap: 5px;
+}
+
+.first-name, .last-name {
+  flex: 1;
+}
+
+label {
+  text-align: left;
+}
+
+button {
+  width: 100%;
 }

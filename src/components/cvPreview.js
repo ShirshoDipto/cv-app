@@ -7,7 +7,7 @@ export default class CVPREVIEW extends Component {
   }
 
   render() {
-    const { personalInfo, workExperience, education } = this.props
+    const { personalInfo, workExperiences, educations } = this.props
     return (
       <div className="cv-preview-container">
         <div className="personalinfo-container">
@@ -26,16 +26,14 @@ export default class CVPREVIEW extends Component {
           <div className="workexperience-container">
             <div className="title">Work Experience</div>
             {
-              workExperience.map(elem => {
+              workExperiences.map(elem => {
                 return (
                   <div key={elem.id} className="work-experience">
                     <div className="input-vals">
                       <div className="input-title">{elem.company}, {elem.location}</div>
                       <div className="input-duration">{elem.position} | {elem.from}-{elem.to}</div>
                     </div>
-                    <div className="input-description">
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur, cum! Illum, voluptates maiores. 
-                    </div>
+                    <div className="input-description">{elem.description}</div>
                   </div>
                 )
               })
@@ -44,17 +42,16 @@ export default class CVPREVIEW extends Component {
           <div className="education-container">
             <div className="title">Education</div>
             {
-              education.map(elem => {
+              educations.map(elem => {
                 return (
                   <div key={elem.id} className="education">
                     <div className="input-vals">
+                      <i className="fa-solid fa-pencil"></i>
+                      <i className="fa-solid fa-trash-can"></i>
                       <div className="input-title">{elem.institution}, {elem.location}</div>
                       <div className="input-duration">{elem.degree} | {elem.from}-{elem.to}</div>
                     </div>
                     <div className="input-subject">{elem.subject}</div>
-                    <div className="input-description">
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur, cum! Illum, voluptates maiores. 
-                    </div>
                   </div>
                 )
               })

@@ -17,12 +17,14 @@ export default class Main extends Component {
         address: "Kushtia, Bangladesh",
         email: "someeamil@gmail.com"
       },
-      workExperience: [
+
+      workExperiences: [
         {
           id: uuidv4(),
           position: "Junior web developer",
           company: "Spotify",
           location: "California",
+          description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur, cum! Illum, voluptates maiores.",
           from: "2010",
           to: "2020"
         },
@@ -31,11 +33,13 @@ export default class Main extends Component {
           position: "Programming Teacher",
           company: "Stanford University",
           location: "California",
+          description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur, cum! Illum, voluptates maiores.",
           from: "2021",
           to: "2022" 
         }
       ],
-      education: [
+
+      educations: [
         {
           id: uuidv4(),
           institution: "Kushtia Govt College",
@@ -65,16 +69,51 @@ export default class Main extends Component {
         }
       ]
     }
+
+    this.handlePersonalChange = this.handlePersonalChange.bind(this)
+    this.handleWorkChange = this.handleWorkChange.bind(this)
+    this.handleEducationChange = this.handleEducationChange.bind(this)
+  }
+
+  handlePersonalChange(e) {
+    e.preventDefault()
+    const formData = new FormData(e.target)
+    const formJson = Object.fromEntries(formData.entries())
+    this.setState({
+      personalInfo: {
+        name: formJson.firstName + " " + formJson.lastName,
+        title: formJson.personTitle,
+        description: formJson.personDescription,
+        mobile: formJson.personMobile,
+        address: formJson.personAddress,
+        email: formJson.personEmail
+      }
+    })
+  }
+
+  handleEducationChange(e) {
+    e.preventDefault()
+    console.log("it is working. education. ")
+  }
+
+  handleWorkChange(e) {
+    e.preventDefault()
+    console.log("it is working. work. ")
   }
 
   render() {
     return (
       <div className="main-container">
-        <CVFORM />
+        <CVFORM 
+          pers={this.handlePersonalChange}
+          work={this.handleEducationChange}
+          edu={this.handleEducationChange}
+        />
         <CVPREVIEW 
           personalInfo={this.state.personalInfo}
-          workExperience={this.state.workExperience}
-          education={this.state.education}
+          workExperiences={this.state.workExperiences}
+          educations={this.state.educations}
+          state={this.state}
         />
       </div>
     )
