@@ -1,0 +1,51 @@
+.main-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cv-preview-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex: 1;
+}
+
+.cv-form-container {
+  flex: 1;
+}
+.other-info-container
+{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.description-container,
+.workexperience-container,
+.education-container
+{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.work-experience, .education {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-vals {
+  display: flex;
+  justify-content: space-between;
+}
+
+.input-subject {
+  text-align: left;
+}
+
+.title {
+  border-bottom: thin solid grey;
+  padding-bottom: 3px;
+}
