@@ -2,107 +2,22 @@ import React, { Component } from "react"
 import { v4 as uuidv4 } from "uuid"
 import CVFORM from "./cvForm"
 import CVPREVIEW from "./cvPreview"
+import data from "../datas/data"
 import "../styles/main.css"
 
 export default class Main extends Component {
   constructor(props) {
     super(props)
 
-    this.state = {
-      personalInfo: {
-        firstName: "Md Shirsho",
-        lastName: "Dipto Haque",
-        title: "Junior Software Developer",
-        description: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Minima tempora sequi architecto quidem quos consequatur exercitationem hic cumque nisi odit dicta nam soluta eligendi ad sit adipisci rerum, ratione possimus.",
-        mobile: "+88017xxxxxxxx",
-        address: "Kushtia, Bangladesh",
-        email: "someeamil@gmail.com"
-      },
+    this.state = data
 
-      personalTemp: {
-        firstName: "Md Shirsho",
-        lastName: "Dipto Haque",
-        title: "Junior Software Developer",
-        description: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Minima tempora sequi architecto quidem quos consequatur exercitationem hic cumque nisi odit dicta nam soluta eligendi ad sit adipisci rerum, ratione possimus.",
-        mobile: "+88017xxxxxxxx",
-        address: "Kushtia, Bangladesh",
-        email: "someeamil@gmail.com"
-      },
-
-      workExperience: {
-        id: uuidv4(),
-        position: "",
-        company: "",
-        location: "",
-        description: "",
-        from: "",
-        to: ""
-      },
-
-      education: {
-        id: uuidv4(),
-        institution: "",
-        location: "",
-        degree: "",
-        subject: "",
-        from: "",
-        to: ""
-      },
-
-      workExperiences: [
-        {
-          id: uuidv4(),
-          position: "Junior web developer",
-          company: "Spotify",
-          location: "California",
-          description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur, cum! Illum, voluptates maiores.",
-          from: "2010",
-          to: "2020"
-        },
-        {
-          id: uuidv4(),
-          position: "Programming Teacher",
-          company: "Stanford University",
-          location: "California",
-          description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur, cum! Illum, voluptates maiores.",
-          from: "2021",
-          to: "2022" 
-        }
-      ],
-
-      educations: [
-        {
-          id: uuidv4(),
-          institution: "Kushtia Govt College",
-          location: "Kushtia, Bangladesh",
-          degree: "HSC",
-          subject: "N/A",
-          from: "2014",
-          to: "2016"
-        },
-        {
-          id: uuidv4(),
-          institution: "Shahjalal University of Science And Technology",
-          location: "Sylhet",
-          degree: "BSc Engineering",
-          subject: "Chemical Engineering",
-          from: "2017",
-          to: "2018"
-        },
-        {
-          id: uuidv4(),
-          institution: "Unknown",
-          location: "Remote",
-          degree: "N/A",
-          subject: "N/A",
-          from: "2023",
-          to: "Present"
-        }
-      ]
-    }
     this.handlePersonalInfo = this.handlePersonalInfo.bind(this) 
     this.handleWorkInfo = this.handleWorkInfo.bind(this)
     this.handleEducation = this.handleEducation.bind(this)
+    this.handleAddWork = this.handleAddWork.bind(this)
+    this.handleAddEducation = this.handleAddEducation.bind(this)
+    this.handleDeleteWork = this.handleDeleteWork.bind(this)
+    this.handleDeleteEducation = this.handleDeleteEducation.bind(this)
   }
 
   handlePersonalInfo(e) {
@@ -165,6 +80,58 @@ export default class Main extends Component {
     })
   }
 
+  handleAddWork(e) {
+    const newWork = {
+      id: uuidv4(),
+      position: "",
+      company: "",
+      location: "",
+      description: "",
+      from: "",
+      to: "",
+    }
+
+    this.setState({
+      workExperiences: this.state.workExperiences.concat(newWork)
+    })
+  }
+
+  handleAddEducation(e) {
+    const newEducation = {
+      id: uuidv4(),
+      institution: "",
+      location: "",
+      degree: "",
+      subject: "",
+      from: "",
+      to: "",
+    }
+
+    this.setState({
+      educations: this.state.educations.concat(newEducation)
+    })
+  }
+
+  handleDeleteWork(e, workId) {
+    const newWorkExperiences = this.state.workExperiences.filter((experience) => {
+      return experience.id !== workId
+    })
+
+    this.setState({
+      workExperiences: newWorkExperiences
+    })
+  }
+
+  handleDeleteEducation(e, educationId) {
+    const newEducations = this.state.educations.filter((education) => {
+      return education.id !== educationId
+    })
+
+    this.setState({
+      educations: newEducations
+    })
+  }
+
   render() {
     return (
       <div className="main-container">
@@ -175,6 +142,10 @@ export default class Main extends Component {
           personalInfo={this.state.personalInfo}
           workExperiences={this.state.workExperiences}
           educations={this.state.educations}
+          addWorkExperience={this.handleAddWork}
+          addEducation={this.handleAddEducation}
+          deleteEducation={this.handleDeleteEducation}
+          deleteWorkExperience={this.handleDeleteWork}
         />
         <CVPREVIEW 
           personalInfo={this.state.personalInfo}

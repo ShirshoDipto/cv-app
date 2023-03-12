@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "../styles/main.css";
-import WorkForm from "./workForm"
-import EducationForm from "./educationForm"
+import WorkForm from "./workForm";
+import EducationForm from "./educationForm";
 
 export default class CVFORM extends Component {
   constructor(props) {
@@ -14,6 +14,10 @@ export default class CVFORM extends Component {
       handleWorkInfo,
       handleEducation,
       personalInfo,
+      addWorkExperience,
+      addEducation,
+      deleteWorkExperience,
+      deleteEducation,
       workExperiences,
       educations,
     } = this.props;
@@ -104,10 +108,17 @@ export default class CVFORM extends Component {
             <h2 className="info-title">Work Experience</h2>
             {workExperiences.map((experience) => {
               return (
-                <WorkForm key={experience.id} experience={experience} handleWorkInfo={handleWorkInfo}/>
+                <WorkForm
+                  key={experience.id}
+                  experience={experience}
+                  handleWorkInfo={handleWorkInfo}
+                  deleteWorkExperience={deleteWorkExperience}
+                />
               );
             })}
-            <button type="submit">Save</button>
+            <button type="button" onClick={addWorkExperience}>
+              Add
+            </button>
           </div>
         </form>
         <form className="education-form">
@@ -115,10 +126,17 @@ export default class CVFORM extends Component {
             <h2 className="info-title">Education</h2>
             {educations.map((elem) => {
               return (
-                <EducationForm key={elem.id} elem={elem} handleEducation={handleEducation}/>
+                <EducationForm
+                  key={elem.id}
+                  elem={elem}
+                  handleEducation={handleEducation}
+                  deleteEducation={deleteEducation}
+                />
               );
             })}
-            <button type="submit">Save</button>
+            <button type="button" onClick={addEducation}>
+              Add
+            </button>
           </div>
         </form>
       </div>

@@ -6,44 +6,44 @@ export default class EducationForm extends Component {
   }
 
   render() {
-    const { elem, handleEducation } = this.props;
+    const { elem, handleEducation, deleteEducation } = this.props;
     return (
-      <div key={elem.id} className="education">
+      <div className="education">
         <div className="label-input-group">
-          <label htmlFor="person-institution">Institution:</label>
+          <label htmlFor={"institution " + elem.id}>Institution:</label>
           <input
             type="text"
-            id="person-institution"
+            id={"institution " + elem.id}
             name="institution"
             value={elem.institution}
             onChange={(e) => handleEducation(e, elem.id)}
           />
         </div>
         <div className="label-input-group">
-          <label htmlFor="person-edu-location">Location:</label>
+          <label htmlFor={"location " + elem.id}>Location:</label>
           <input
             type="text"
-            id="person-edu-company"
+            id={"location " + elem.id}
             name="location"
             value={elem.location}
             onChange={(e) => handleEducation(e, elem.id)}
           />
         </div>
         <div className="label-input-group">
-          <label htmlFor="person-degree">Degree:</label>
+          <label htmlFor={"degree " + elem.id}>Degree:</label>
           <input
             type="text"
-            id="person-degree"
+            id={"degree " + elem.id}
             name="degree"
             value={elem.degree}
             onChange={(e) => handleEducation(e, elem.id)}
           />
         </div>
         <div className="label-input-group first-name">
-          <label htmlFor="work-subject">Subject:</label>
+          <label htmlFor={"subject " + elem.id}>Subject:</label>
           <input
             type="text"
-            id="work-subject"
+            id={"subject " + elem.id}
             name="subject"
             value={elem.subject}
             onChange={(e) => handleEducation(e, elem.id)}
@@ -51,26 +51,27 @@ export default class EducationForm extends Component {
         </div>
         <div className="names">
           <div className="label-input-group last-name">
-            <label htmlFor="work-from">From:</label>
+            <label htmlFor={"from " + elem.id}>From:</label>
             <input
               type="text"
-              id="work-from"
+              id={"from " + elem.id}
               name="from"
               value={elem.from}
               onChange={(e) => handleEducation(e, elem.id)}
             />
           </div>
           <div className="label-input-group last-name">
-            <label htmlFor="work-to">To:</label>
+            <label htmlFor={"to " + elem.id}>To:</label>
             <input
               type="text"
-              id="work-to"
+              id={"to " + elem.id}
               name="to"
               value={elem.to}
               onChange={(e) => handleEducation(e, elem.id)}
             />
           </div>
         </div>
+        <button onClick={(e) => deleteEducation(e, elem.id)}>Delete</button>
       </div>
     );
   }

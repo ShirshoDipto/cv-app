@@ -11,8 +11,10 @@ export default class CVPREVIEW extends Component {
     return (
       <div className="cv-preview-container">
         <div className="personalinfo-container">
-          <h1 className="cv-name">{personalInfo.firstName} {personalInfo.lastName}</h1>
-          <h3 className="cv-title">{personalInfo.title}</h3>
+          <div className="cv-name-title">
+            <h1 className="cv-name">{personalInfo.firstName} {personalInfo.lastName}</h1>
+            <h3 className="cv-title">{personalInfo.title}</h3>
+          </div>
           <div className="contact-info">
             <div className="address">{personalInfo.address}</div>
             <div className="phone">{personalInfo.mobile}</div>

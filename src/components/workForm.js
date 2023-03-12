@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { v4 as uuidv4 } from "uuid"
 
 export default class WorkForm extends Component {
   constructor(props) {
@@ -6,34 +7,34 @@ export default class WorkForm extends Component {
   }
 
   render() {
-    const { experience, handleWorkInfo } = this.props
+    const { experience, handleWorkInfo, deleteWorkExperience } = this.props
     return (
       <div className="work-experience">
         <div className="label-input-group">
-          <label htmlFor="person-position">Position:</label>
+          <label htmlFor={"position " + experience.id}>Position:</label>
           <input
             type="text"
-            id="person-position"
+            id={"position " + experience.id}
             name="position"
             value={experience.position}
             onChange={(e) => handleWorkInfo(e, experience.id)}
           />
         </div>
         <div className="label-input-group">
-          <label htmlFor="person-company">Company:</label>
+          <label htmlFor={"company " + experience.id}>Company:</label>
           <input
             type="text"
-            id="person-company"
+            id={"company " + experience.id}
             name="company"
             value={experience.company}
             onChange={(e) => handleWorkInfo(e, experience.id)}
           />
         </div>
         <div className="label-input-group">
-          <label htmlFor="person-work-location">Location:</label>
+          <label htmlFor={"location " + experience.id}>Location:</label>
           <input
             type="text"
-            id="person-work-location"
+            id={"location " + experience.id}
             name="location"
             value={experience.location}
             onChange={(e) => handleWorkInfo(e, experience.id)}
@@ -41,20 +42,20 @@ export default class WorkForm extends Component {
         </div>
         <div className="names">
           <div className="label-input-group first-name">
-            <label htmlFor="work-from">From:</label>
+            <label htmlFor={"from " + experience.id}>From:</label>
             <input
               type="text"
-              id="work-from"
+              id={"from " + experience.id}
               name="from"
               value={experience.from}
               onChange={(e) => handleWorkInfo(e, experience.id)}
             />
           </div>
           <div className="label-input-group last-name">
-            <label htmlFor="work-to">To:</label>
+            <label htmlFor={"to " + experience.id}>To:</label>
             <input
               type="text"
-              id="work-to"
+              id={"position " + experience.id}
               name="to"
               value={experience.to}
               onChange={(e) => handleWorkInfo(e, experience.id)}
@@ -62,16 +63,17 @@ export default class WorkForm extends Component {
           </div>
         </div>
         <div className="label-input-group">
-          <label htmlFor="person-work-description">Description:</label>
+          <label htmlFor={"description " + experience.id}>Description:</label>
           <textarea
             type="text"
-            id="person-work-description"
+            id={"description " + experience.id}
             name="description"
             rows="5"
             value={experience.description}
             onChange={(e) => handleWorkInfo(e, experience.id)}
           ></textarea>
         </div>
+        <button onClick={(e) => deleteWorkExperience(e, experience.id)}>Delete</button>
       </div>
     );
   }
