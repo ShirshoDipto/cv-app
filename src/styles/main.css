@@ -74,6 +74,10 @@
   padding-bottom: 20px;
 }
 
+.work-experience:last-child, .education:last-child {
+  border: none;
+}
+
 .personal-info {
   display: flex;
   flex-direction: column;
