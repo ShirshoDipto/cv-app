@@ -74,10 +74,6 @@
   padding-bottom: 20px;
 }
 
-.education {
-  gap: 0px;
-}
-
 .personal-info {
   display: flex;
   flex-direction: column;
